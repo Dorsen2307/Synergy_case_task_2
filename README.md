@@ -1,13 +1,6 @@
 # 🔢 Простейший счетчик с визуальными эффектами
 
 <div align="center">
-  
-  <!--
-    ВСТАВЬТЕ ССЫЛКУ НА ВАШУ КАРТИНКУ.
-    Если вы загрузите файл screenshot.png в корень репозитория,
-    строка ниже будет работать автоматически.
-    Или используйте ссылку: https://github.com/user-attachments/assets/26ca5970-2030-4df6-a5f8-f88c0124eca3
-  -->
   <img width="773" height="548" alt="image" src="https://github.com/user-attachments/assets/f09b6501-7b4b-451a-a468-64addaa4d2e6" />
   <p><em>Главный экран приложения</em></p>
 </div>
@@ -31,3 +24,13 @@
 *   **HTML5**: Базовая структура приложения.
 *   **CSS3**: Вся стилизация, анимации и эффект стекла.
 *   **JavaScript (ES6)**: Полная логика работы счетчика, включая динамическое изменение цвета и обработку событий.
+
+## 👨‍💻 Автор
+
+<div align="center">
+  <a href="https://github.com/Dorsen2307">
+    <img src="https://img.shields.io/badge/GitHub-Dorsen2307-181717?style=flat-square&logo=github&logoColor=white&labelColor=181717" height="30">
+  </a>
+  <br>
+  <sub>✨ С любовью к коду ✨</sub>
+</div>
