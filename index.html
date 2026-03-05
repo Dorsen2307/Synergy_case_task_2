@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Простейший счетчик</title>
+</head>
+<body>
+<div class="counter-card">
+	<!-- Окошко отображения результата -->
+	<div class="result-window" id="resultWindow">
+		<span id="value">0</span>
+	</div>
+
+	<!-- Кнопки управления -->
+	<div class="buttons">
+		<button class="btn minus" id="decrement" aria-label="Уменьшить">−</button>
+		<button class="btn plus" id="increment" aria-label="Увеличить">+</button>
+	</div>
+
+	<!-- Стилизованное поле для сообщения -->
+	<div class="message-area">
+		<div class="extreme-message" id="extremeMessage">Вы достигли экстремального значения</div>
+	</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

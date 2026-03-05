@@ -1,0 +1,221 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+}
+
+body {
+	background: linear-gradient(145deg, #1a2f3f 0%, #3a6b5c 70%, #d4a373 100%);
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+}
+
+.counter-card {
+	background: rgba(255, 255, 255, 0.12);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+	border-radius: 48px;
+	padding: 3rem 3.5rem;
+	box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3), inset 0 2px 2px rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	text-align: center;
+}
+
+/* Окошко результата */
+.result-window {
+	background: rgba(10, 20, 30, 0.5);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	border-radius: 30px;
+	padding: 1.2rem 2.5rem;
+	margin-bottom: 2.5rem;
+	border: 1px solid rgba(255, 255, 255, 0.25);
+	box-shadow: inset 0 8px 12px rgba(0,0,0,0.3), 0 4px 8px rgba(255,255,255,0.1);
+	transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.result-window span {
+	font-size: 5.5rem;
+	font-weight: 800;
+	color: white;
+	text-shadow: 0 4px 10px rgba(0, 30, 20, 0.6);
+	letter-spacing: 4px;
+	display: inline-block;
+	min-width: 120px;
+}
+
+/* Классы для цвета окна (будут применяться через JS) */
+.result-window.color-zero {
+	background-color: #e74c3c;  /* Красный для 0 */
+	box-shadow: inset 0 8px 12px rgba(0,0,0,0.4), 0 0 20px #e74c3c80;
+}
+
+.result-window.color-positive {
+	background-color: #f1c40f;  /* Желтый для +10 */
+	box-shadow: inset 0 8px 12px rgba(0,0,0,0.4), 0 0 20px #f1c40f80;
+}
+
+.result-window.color-negative {
+	background-color: #2ecc71;  /* Зеленый для -10 */
+	box-shadow: inset 0 8px 12px rgba(0,0,0,0.4), 0 0 20px #2ecc7180;
+}
+
+/* Промежуточные состояния - будут устанавливаться динамически */
+.result-window.color-transition {
+	/* Базовый класс для переходов, само значение цвета будет в inline-стиле */
+	/*transition: background-color 0.3s ease, box-shadow 0.3s ease;*/
+}
+
+.buttons {
+	display: flex;
+	gap: 1.8rem;
+	justify-content: center;
+	align-items: center;
+}
+
+.btn {
+	border: none;
+	cursor: pointer;
+	font-size: 3.2rem;
+	font-weight: bold;
+	width: 100%;
+	height: 90px;
+	border-radius: 5px;
+	background: linear-gradient(135deg, #f6d5a3, #e59866, #b5673b);
+	color: rgba(255, 255, 255, 0.95);
+	box-shadow: 0 12px 18px -6px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,215,150,0.3) inset;
+	transition: all 0.15s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+	text-shadow: 0 3px 5px #3f2b1c;
+}
+
+.btn:hover:not(:disabled) {
+	transform: scale(1.04);
+	background: linear-gradient(145deg, #ffdfa8, #f5b47b, #c97f4b);
+	box-shadow: 0 16px 22px -8px black, 0 0 0 3px rgba(255, 240, 180, 0.6) inset;
+}
+
+.btn:active:not(:disabled) {
+	transform: scale(0.96);
+	background: linear-gradient(145deg, #b5673b, #e59866, #f6d5a3);
+	box-shadow: 0 5px 12px rgba(0,0,0,0.6) inset;
+}
+
+.btn.minus {
+	background: linear-gradient(225deg, #86aba1, #4f7a6e, #265c4b);
+	box-shadow: 0 12px 18px -6px rgba(0,0,0,0.5), 0 0 0 2px rgba(170, 230, 200, 0.4) inset;
+	text-shadow: 0 3px 5px #142e25;
+}
+
+.btn.minus:hover:not(:disabled) {
+	background: linear-gradient(225deg, #9dc5b8, #67998b, #30755f);
+	box-shadow: 0 16px 22px -8px black, 0 0 0 3px rgba(160, 240, 210, 0.6) inset;
+}
+
+.btn.minus:active:not(:disabled) {
+	background: linear-gradient(225deg, #265c4b, #4f7a6e, #86aba1);
+}
+
+/* Стили для заблокированных кнопок */
+.btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	filter: grayscale(40%);
+	transform: none;
+}
+
+.btn:focus-visible {
+	outline: 3px solid #ffe3b0;
+	outline-offset: 4px;
+}
+
+/* Стилизованное поле для сообщения */
+.message-area {
+	margin-top: 2rem;
+	padding: 1rem 1.5rem;
+	border-radius: 50px;
+	background: rgba(0, 0, 0, 0.3);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+	transition: all 0.4s ease;
+	min-height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.extreme-message {
+	font-size: 1.4rem;
+	font-weight: 600;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	color: transparent;
+	background: linear-gradient(135deg, #fff8e7, #ffe6b3, #ffd700);
+	-webkit-background-clip: text;
+	background-clip: text;
+	text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+	opacity: 0;
+	transform: translateY(10px);
+	transition: all 0.4s ease;
+	position: relative;
+	padding: 0.3rem 1rem;
+}
+
+.extreme-message::before {
+	content: "⚡";
+	margin-right: 10px;
+	font-size: 1.8rem;
+	opacity: 0;
+	transition: opacity 0.4s ease;
+}
+
+.extreme-message::after {
+	content: "⚡";
+	margin-left: 10px;
+	font-size: 1.8rem;
+	opacity: 0;
+	transition: opacity 0.4s ease;
+}
+
+/* Класс для отображения сообщения */
+.extreme-message.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.extreme-message.visible::before,
+.extreme-message.visible::after {
+	opacity: 1;
+}
+
+/* Специфические стили для разных границ */
+.extreme-message.max-reached {
+	background: linear-gradient(135deg, #fff2b5, #ffd966, #f1c40f);
+	-webkit-background-clip: text;
+	background-clip: text;
+}
+
+.extreme-message.min-reached {
+	background: linear-gradient(135deg, #b5ffcb, #6fda8b, #2ecc71);
+	-webkit-background-clip: text;
+	background-clip: text;
+}
+
+@media (max-width: 500px) {
+	.counter-card {
+		padding: 2rem 1.8rem;
+	}
+	.result-window span {
+		font-size: 4rem;
+		min-width: 100px;
+	}
+}
